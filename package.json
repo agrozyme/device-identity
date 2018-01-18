@@ -1,0 +1,28 @@
+{
+  "name": "device-identity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npm -g ls typescript || npm -g i typescript",
+    "install": "tsc -p tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agrozyme/device-identity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agrozyme/device-identity/issues"
+  },
+  "homepage": "https://github.com/agrozyme/device-identity#readme",
+  "dependencies": {
+    "int64-buffer": "^0.1.10",
+    "tslib": "^1.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^9.3.0"
+  }
+}
