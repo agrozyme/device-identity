@@ -8,7 +8,7 @@ A encoder / decoder of device identity for IoT
 npm install --save device-identity
 ```
 
-# Usage
+# Use
 
 ```javascript
 import Identity from 'device-identity';
@@ -28,11 +28,11 @@ const organization = identity.organization;
 //  code = 0x445566
 const code = identity.code;
 
-let identity = new Identity(code, organization, index);
+identity = new Identity(code, organization, index);
 
 //  Get number identity
 //  numberIdentity = 0x001F112233445566;
-let numberIdentity = identity.toNumber();
+numberIdentity = identity.toNumber();
 
 //  Get string identity
 //  stringIdentity = '001F112233445566';

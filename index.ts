@@ -1,8 +1,9 @@
 import {Uint64BE} from 'int64-buffer';
 
 export default class Identity {
-  protected readonly addressPartMask = 0x0000000000FFFFFF;
-  protected readonly indexMask = 0x000000000000001F;
+  protected readonly mask = {
+    block: 0x0000000000FFFFFF, index: 0x000000000000001F, multicast: 0x010000, locally: 0x020000
+  };
 
   constructor(code: number, organization: number = 0, index: number = 0) {
     this.code = code;
@@ -18,7 +19,7 @@ export default class Identity {
 
   set code(value: number) {
     // noinspection NonShortCircuitBooleanExpressionJS
-    this._code = value & this.addressPartMask;
+    this._code = value & this.mask.block;
   }
 
   protected _index: number = 0;
@@ -29,7 +30,7 @@ export default class Identity {
 
   set index(value: number) {
     // noinspection NonShortCircuitBooleanExpressionJS
-    this._index = value & this.indexMask;
+    this._index = value & this.mask.index;
   }
 
   protected _organization: number = 0;
@@ -40,7 +41,7 @@ export default class Identity {
 
   set organization(value: number) {
     // noinspection NonShortCircuitBooleanExpressionJS
-    this._organization = value & this.addressPartMask;
+    this._organization = value & this.mask.block;
   }
 
   static from(item: number) {
@@ -57,6 +58,16 @@ export default class Identity {
 
   formatIndex() {
     return this.hex(this.index, 2).toUpperCase();
+  }
+
+  isLocally() {
+    // noinspection NonShortCircuitBooleanExpressionJS
+    return Boolean(this.organization & this.mask.locally);
+  }
+
+  isMulticast() {
+    // noinspection NonShortCircuitBooleanExpressionJS
+    return Boolean(this.organization & this.mask.multicast);
   }
 
   toNumber() {
