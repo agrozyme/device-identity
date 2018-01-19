@@ -6,7 +6,7 @@
   "scripts": {
     "preinstall": "tsc -h >null || npm -g i typescript",
     "install": "tsc -p tsconfig.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "tslib": "^1.8.1"
   },
   "devDependencies": {
+    "@types/mocha": "^2.2.46",
     "@types/node": "^9.3.0"
   }
 }

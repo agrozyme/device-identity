@@ -44,12 +44,30 @@ export default class Identity {
     this._organization = value & this.mask.block;
   }
 
-  static from(item: number) {
-    const buffer = new Uint64BE(item).toBuffer();
+  static from(item: number | string) {
+    const data = ('number' === typeof item) ? item : parseInt(item, 16);
+    const buffer = new Uint64BE(data).toBuffer();
     const code = buffer.readUIntBE(5, 3);
     const organization = buffer.readUIntBE(2, 3);
     const index = buffer.readUInt8(1);
     return new Identity(code, organization, index);
+  }
+
+  static validate(item: any) {
+    if ('number' === typeof item) {
+      return (Number.isSafeInteger(item) && (0 <= item));
+    }
+
+    if (false === /^([0-9a-fA-F]+)$/.test(item)) {
+      return false;
+    }
+
+    try {
+      const data = parseInt(item, 16);
+      return Number.isSafeInteger(data);
+    } catch (error) {
+      return false;
+    }
   }
 
   formatCode() {
@@ -77,8 +95,8 @@ export default class Identity {
   toString() {
     const organization = this.hex(this.organization, 6);
     const code = this.hex(this.code, 6);
-    const index = this.hex(this.index, 2);
-    return index + organization + code;
+    const index = this.hex(this.index, 4);
+    return (index + organization + code).toUpperCase();
   }
 
   // noinspection JSMethodCanBeStatic
