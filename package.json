@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preinstall": "tsc -h >null || npm -g i typescript",
+    "preinstall": "(tsc -v || npm -g i typescript) && (mocha -V || npm -g i mocha)",
     "install": "tsc -p tsconfig.json",
     "test": "mocha"
   },
@@ -20,7 +20,7 @@
   "homepage": "https://github.com/agrozyme/device-identity#readme",
   "dependencies": {
     "int64-buffer": "^0.1.10",
-    "tslib": "^1.8.1"
+    "tslib": "^1.9.0"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.46",
