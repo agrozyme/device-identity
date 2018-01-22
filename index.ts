@@ -1,5 +1,4 @@
 import {Uint64BE} from 'int64-buffer';
-import 'mocha';
 
 export default class Identity {
   protected readonly mask = {
